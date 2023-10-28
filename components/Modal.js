@@ -3,24 +3,12 @@
 import { FormEvent, Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
-import { addUserEmailToProduct } from '@/lib/actions'
 
 
 const Modal = ({ productId }) => {
   let [isOpen, setIsOpen] = useState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    await addUserEmailToProduct(productId, email);
-
-    setIsSubmitting(false)
-    setEmail('')
-    closeModal()
-  }
 
   const openModal = () => setIsOpen(true);
 
@@ -92,7 +80,7 @@ const Modal = ({ productId }) => {
                   </p>
                 </div>
 
-                <form className="flex flex-col mt-5" onSubmit={handleSubmit}>
+                <form className="flex flex-col mt-5" >
                   <label htmlFor="email" className="text-sm font-medium text-gray-700">
                     Email address
                   </label>
@@ -118,7 +106,7 @@ const Modal = ({ productId }) => {
                   <button type="submit"
                     className="dialog-btn"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Track'}
+                    Track
                   </button>
                 </form>
               </div>
