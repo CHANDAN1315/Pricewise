@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getLowestPrice, getHighestPrice, getAveragePrice } from "@/lib/utils";
+import { getLowestPrice, getHighestPrice , getAveragePrice} from "@/lib/utils";
 import Product from "@/lib/models/product.model";
 import { scrapeAmazonProduct } from "@/lib/scraper";
 import { connectToDB } from "@/lib/scraper/mongoose";
@@ -8,6 +8,9 @@ import { connectToDB } from "@/lib/scraper/mongoose";
 export const maxDuration = 9; // This function can run for a maximum of 300 seconds
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+
+
 
 export async function GET(request) {
   try {
@@ -37,7 +40,7 @@ export async function GET(request) {
           priceHistory: updatedPriceHistory,
           lowestPrice: getLowestPrice(updatedPriceHistory),
           highestPrice: getHighestPrice(updatedPriceHistory),
-          averagePrice: Number(getAveragePrice(updatedPriceHistory)),
+          averagePrice: getAveragePrice(updatedPriceHistory)
         };
 
         // Update Products in DB

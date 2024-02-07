@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 const ProductDetails = async ({ params: { id } }) => {
   const product = await getProductById(id);
-
+  console.log(product)
   if (!product) redirect('/')
 
   const similarProducts = await getSimilarProducts(id);
